@@ -22,6 +22,9 @@ model Customer {
     createdAt    DateTime      @default(now())
     updatedAt    DateTime      @updatedAt
     email        String        @unique
+    firstName    String        @default("")
+    lastName     String        @default("")
+    phoneNumber  String        @default("")
     comments     Comment[]
     interactions Interaction[]
 }
@@ -47,26 +50,27 @@ enum InteractionType {
 }
 
 model Interaction {
-    id         String          @id @default(cuid())
-    createdAt  DateTime        @default(now())
-    updatedAt  DateTime        @updatedAt
-    author     User            @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    authorId   String
-    type       InteractionType
-    comments   Comment[]
-    customer   Customer?       @relation(fields: [customerId], references: [id])
-    customerId String?
+    id          String          @id @default(cuid())
+    createdAt   DateTime        @default(now())
+    updatedAt   DateTime        @updatedAt
+    description String?
+    author      User            @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    authorId    String
+    type        InteractionType
+    comments    Comment[]
+    customer    Customer?       @relation(fields: [customerId], references: [id])
+    customerId  String?
 }
 
 model Comment {
-    id            String      @id @default(cuid())
-    createdAt     DateTime    @default(now())
-    updatedAt     DateTime    @updatedAt
-    author        User        @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    id            String       @id @default(cuid())
+    createdAt     DateTime     @default(now())
+    updatedAt     DateTime     @updatedAt
+    author        User         @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     authorId      String
     content       String
-    interaction   Interaction @relation(fields: [interactionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    interactionId String
-    customer      Customer?   @relation(fields: [customerId], references: [id])
+    interaction   Interaction? @relation(fields: [interactionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    interactionId String?
+    customer      Customer?    @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     customerId    String?
 }

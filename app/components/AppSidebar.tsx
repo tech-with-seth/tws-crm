@@ -1,5 +1,5 @@
-import { Gauge, Home } from "lucide-react";
-import { Link } from "react-router";
+import { Contact, Gauge, Home } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router";
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +14,8 @@ import {
 } from "~/components/ui/sidebar";
 
 export function AppSidebar() {
+  const location = useLocation();
+
   return (
     <Sidebar>
       <SidebarHeader />
@@ -33,9 +35,17 @@ export function AppSidebar() {
                   to: "/dashboard",
                   icon: Gauge,
                 },
+                {
+                  title: "Customers",
+                  to: "/customers",
+                  icon: Contact,
+                },
               ].map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={location.pathname === item.to}
+                  >
                     <Link to={item.to}>
                       <item.icon />
                       <span>{item.title}</span>
