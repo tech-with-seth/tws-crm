@@ -76,3 +76,18 @@ export function useUser(): User {
   }
   return maybeUser;
 }
+
+export function pickRandom(arr: any[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+export function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "full",
+    timeStyle: "long",
+  }).format(date);
+}
+
+export function getRandomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
