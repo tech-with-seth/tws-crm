@@ -12,7 +12,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
-      <h1 className="text-4xl font-bold">"{`Welcome to ${APP_NAME}`}"</h1>
+      <h1 className="text-4xl font-bold">{`Welcome to ${APP_NAME}`}</h1>
     </>
   );
 }
